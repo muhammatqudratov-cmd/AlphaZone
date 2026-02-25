@@ -1,6 +1,7 @@
 import express from 'express';
 import path from "path";
 import router from './router';
+import routerAdmin from './routerAdmin';
 
 
 /** 1-ENTRANCE **/
@@ -16,9 +17,10 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 /** 4-ROUTES **/
-app.use('/', router);        // SPA: REACT  API service sfatida ishlatish
+app.use('/admin', routerAdmin);      // SSR : EJS 
+app.use('/', router);                 // SPA: REACT  API service sfatida ishlatish
 
 
 
 
-export default app;
+export default app;  
