@@ -1,7 +1,7 @@
 {
-  "name": "burak",
+  "name": "Alpha Zone",
   "version": "1.0.0",
-  "description": "This is burak project backend",
+  "description": "This is the Alpha Zone project backend",
   "main": "src/server.ts",
   "scripts": {
     "start": "ts-node src/server.ts",
@@ -10,7 +10,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "MIT36",
+  "author": "Almukhammed",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^6.0.0",

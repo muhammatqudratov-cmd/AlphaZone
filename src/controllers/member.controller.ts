@@ -1,3 +1,4 @@
+
 import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MmberService from "../models/Member.service";
@@ -175,6 +176,3 @@ memberController.retrieveyAuth = async (
 };
 
 export default memberController;
-
-// Default ishlatganda ma'lumotlarni umimiy qilib oladi
-// Agar Default o'rniga Export ni o'zidan foydalansak bunday holat alohidagi ma'lumotni oladi

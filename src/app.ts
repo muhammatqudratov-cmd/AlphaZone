@@ -17,6 +17,8 @@ const store = new MongoDBStore({
 });
 
 
+
+
 /** 1-ENTRANCE **/
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
@@ -45,6 +47,9 @@ app.use(function (req,res,next) {                 // Memberimizni qiymatini olis
     res.locals.member = sessionInstance.member;
     next();
 });
+app.use(express.json());
+
+
 
 /** 3-VIEWS **/
 app.set("views", path.join(__dirname, "views"));
@@ -52,7 +57,11 @@ app.set("view engine", "ejs");
 
 /** 4-ROUTES **/
 app.use('/admin', routerAdmin);      // SSR : EJS 
+
 app.use('/', router);               // SPA: REACT  API service sfatida ishlatish
+
+app.use('/', router);                 // SPA: REACT  API service sfatida ishlatish
+
 
 
 

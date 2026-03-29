@@ -1,58 +1,60 @@
-import mongoose, { Schema } from "mongoose";
-import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 
-// Schema larni qurish usullari => 1.Schema first / 2.Code first
+import mongoose, {Schema} from 'mongoose';
+import { MemberStatus, MemberType } from '../libs/enums/member.enum';
+
+// Schema larni qurish usullari => 1.Schema first / 2.Code first 
 // Enum qiymatlar bu aniq qiymatni ishlatish uchun kerak bo'ladigan type hisoblanadi
 
-const memberSchema = new Schema(
-  {
-    memberType: {
-      type: String,
-      enum: MemberType,
-      default: MemberType.USER,
+
+const memberSchema = new Schema ({
+    memberType: { 
+        type: String,
+        enum: MemberType,
+        default: MemberType.USER
     },
 
-    memberStatus: {
-      type: String,
-      enum: MemberStatus,
-      default: MemberStatus.ACTIVE,
+    MemberStatus: {
+        type: String,
+        enum: MemberStatus,
+        default:MemberStatus.ACTIVE,
     },
+
     memberNick: {
-      type: String,
-      index: { unique: true, sparse: true },
-      required: true,
+        type: String,
+        index: { unique: true, sparse: true },
+        required: true,
     },
 
     memberPhone: {
-      type: String,
-      index: { unique: true, sparse: true },
-      required: true,
+        type: String,
+        index: { unique: true, sparse: true },
+        required: true,
     },
 
     memberPassword: {
-      type: String,
-      select: false,
-      required: true,
+        type: String,
+        select: false,
+        required: true,
     },
 
     memberAdress: {
-      type: String,
+        type: String,
     },
 
     memberDesc: {
-      type: String,
+        type: String,
     },
 
     memberImage: {
-      type: String,
+        type: String,
     },
 
     memberPoints: {
-      type: Number,
-      default: 0,
+        type: String,
+        default: 0,
     },
-  },
-  { timestamps: true }, // updatedAt, createdAt
+},
+{timestamps: true}         // updatedAt, createdAt
 );
 
-export default mongoose.model("Member", memberSchema);
+export default mongoose.model('Member', memberSchema);

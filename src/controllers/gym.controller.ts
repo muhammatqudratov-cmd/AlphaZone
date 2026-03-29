@@ -1,3 +1,4 @@
+
 import {NextFunction, Request, Response} from "express";
 import {T} from "../libs/types/common";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
@@ -149,6 +150,5 @@ gymController.verifyRestaurant = (
         );
     } 
 }; 
-
 
 export default gymController;

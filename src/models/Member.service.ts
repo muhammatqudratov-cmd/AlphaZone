@@ -1,3 +1,4 @@
+
  import { Member } from "./../libs/types/member";
 import { MemberStatus } from "./../libs/enums/member.enum";
 import { MemberType } from "../libs/enums/member.enum";
@@ -187,6 +188,3 @@ class MemberService {
 }
 
 export default MemberService;
-
-// const tempResult = new this.memberModel(input);   // <-- Bu Schema Modul class hisoblanadi
-// const result = await tempResult.save();
