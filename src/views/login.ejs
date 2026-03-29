@@ -1,0 +1,57 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/login.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+
+<body class="page-login">
+  <div class="login-container auth-page">
+    <div class="auth-shell">
+      <div class="auth-brand-panel">
+        <div class="auth-brand-mark">IRON FORGE</div>
+        <h1>ALPHA ZONE</h1>
+        <p>FORGE YOUR LEGACY</p>
+      </div>
+
+      <form class="auth-form-shell" action="/admin/login" METHOD="POST">
+        <div class="login-frame auth-card">
+          <div class="auth-icon">⚔️</div>
+          <div class="login-top auth-card-top">
+            <span>Login</span>
+            <div>Go back <a href="/admin">Home</a></div>
+            <p>
+              Not registered yet?
+              <a href="/admin/signup">Signup</a>
+            </p>
+          </div>
+          <div class="login-input-frame">
+            <div class="login-input-container">
+              <label> GYM </label>
+              <input
+                type="text"
+                name="memberNick"
+                class="member-nick"
+                placeholder="Username"
+                value=""
+                required
+              />
+            </div>
+            <div class="login-input-container">
+              <label>Password *</label>
+              <input
+                type="password"
+                name="memberPassword"
+                class="member-password"
+                placeholder="Password"
+                value=""
+                required
+              />
+            </div>
+          </div>
+          <button class="login-btn btn" name="login" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+<%- include('includes/footer') %>

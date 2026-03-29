@@ -1,0 +1,89 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/home.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js"></script>
+
+<body class="page-home">
+  <div class="home-container admin-shell">
+    <div class="navigation-menu admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-kicker">Iron Forge</span>
+        <strong>Alpha Zone</strong>
+      </div>
+      <ul class="nav justify-content-center">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link active" href="/admin"><i><b>Home</b></i></a>
+        </li>
+        <% if(!member) { %>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/signup"><i><b>Signup</b></i></a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/login"><i><b>Login</b></i></a>
+        </li>
+        <% } else { %>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/product/all"><b>Menu</b></a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all"><b>Users</b></a>
+        </li>
+        <li
+          class="nav-item"
+          style="cursor: pointer"
+          onclick="return confirm('Do you want to logout?')"
+        >
+          <a class="nav-link" href="/admin/logout"><b>Logout</b></a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <div class="dashboard-stage">
+      <div class="dashboard-heading">
+        <span class="section-kicker">Admin Command</span>
+        <h1>Forge Control Center</h1>
+        <!-- <p>Manage supplements, users, and the Alpha Zone floor with a sharper industrial interface.</p> -->
+      </div>
+
+<!-- GYM HERO SECTION -->
+<div class="gym-hero-section">
+
+  <!-- Animated background grid -->
+  <div class="gym-hero-bg">
+    <div class="hero-grid-lines"></div>
+  </div>
+
+  <!-- Main content -->
+  <div class="gym-hero-content">
+    <!-- Gym image icon -->
+    <div class="gym-main-icon" aria-hidden="true">
+      <img
+        src="/images/gym-icon.png"
+        alt="gym icon"
+        class="gym-hero-img"
+      />
+    </div>
+
+    <!-- Motivational tagline -->
+    <p class="hero-tagline">
+      <span class="hero-tagline-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 21V12.8C9 10.7 10.7 9 12.8 9H14.8C16.6 9 18 10.4 18 12.2V14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 13L6.8 10.8C5.7 9.7 5.7 7.9 6.8 6.8C7.9 5.7 9.7 5.7 10.8 6.8L13 9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M15 8V5.5C15 4.7 15.7 4 16.5 4C17.3 4 18 4.7 18 5.5V8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="hero-tagline-text"><b>WELLCOME TO ADMIN PANEL</b></span>
+    </p>
+
+  </div>
+</div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/home.js"></script>
+</body>
+
+<%- include('includes/footer') %>

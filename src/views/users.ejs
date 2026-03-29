@@ -1,0 +1,96 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/users.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+
+<body class="page-users">
+  <div class="users-container admin-shell">
+    <% if(!member) { %>
+    <div class="navigation-menu admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-kicker">Iron Forge</span>
+        <strong>Alpha Zone</strong>
+      </div>
+      <ul class="nav justify-content-center">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link active" href="/admin/">Home</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/signup">SignUp</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/login">Login</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="users-frame admin-content">
+      <div class="board panel-card empty-state">Please login first!</div>
+    </div>
+
+    <% } else { %>
+    <div class="navigation-menu admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-kicker">Iron Forge</span>
+        <strong>Alpha Zone</strong>
+      </div>
+      <ul class="nav justify-content-center">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link active" href="/admin/">Home</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/product/all">Menu</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all">Users</a>
+        </li>
+        <li
+          class="nav-item"
+          style="cursor: pointer"
+          onclick="return confirm('Do you really want to logout?')"
+        >
+          <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="users-frame admin-content">
+      <div class="board panel-card">
+        <div class="user-table">
+          <div class="section-heading-row">
+            <span class="header-name" style="margin-bottom: 30px">Users List</span>
+          </div>
+          <table class="table table-hover table-sm">
+            <thead class="thead-light">
+              <tr class="thead-light">
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <% users.map(function(value, index) { %>
+            <tbody>
+              <td><%= index+1 %></td>
+              <td><span class="user-avatar"></span><span class="user-name"><%= value.memberNick %></span></td>
+              <td><%= value.memberPhone %></td>
+              <td style="width: 13%">
+                <select class="spec-select member-status" id="<%= value._id %>">
+                  <option value="ACTIVE" <%= value.memberStatus ==='ACTIVE' ? 'selected': '' %> >ACTIVE</option>
+                  <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected': '' %> >BLOCK</option>
+                  <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected': '' %> >DELETE</option>
+                </select>
+              </td>
+            </tbody>
+            <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <script type="text/javascript" src="/js/users.js"></script>
+</body>
+
+<%- include('includes/footer') %>

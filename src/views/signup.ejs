@@ -1,0 +1,127 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/signup.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+
+<body class="page-signup">
+  <div class="signup-container auth-page">
+    <div class="auth-shell auth-shell-wide">
+      <div class="auth-brand-panel">
+        <div class="auth-brand-mark">IRON FORGE</div>
+        <h1>ALPHA ZONE</h1>
+        <p>FORGE YOUR LEGACY</p>
+      </div>
+
+      <form
+        class="auth-form-shell"
+        onsubmit="return validateSignupForm()"
+        action="/admin/signup"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="signup-frame auth-card auth-card-wide">
+          <div class="auth-icon">⚔️</div>
+          <div class="signup-top auth-card-top">
+            <span>Signup</span>
+            <div>Go back <a href="/admin">Home</a></div>
+            <p>
+              Already signed up?
+              <a href="/admin/login">Login</a>
+            </p>
+          </div>
+
+          <div class="sign-input-frame auth-grid" style="justify-content: space-between">
+            <div class="sign-up-frame">
+              <label> GYM </label>
+              <input
+                type="text"
+                name="memberNick"
+                class="member-nick"
+                placeholder="Username"
+                value=""
+              />
+            </div>
+            <div class="sign-up-frame">
+              <label>Phone *</label>
+              <input
+                type="text"
+                name="memberPhone"
+                class="member-phone"
+                placeholder="Phone"
+                value=""
+              />
+            </div>
+          </div>
+          <div class="sign-input-frame auth-grid" style="justify-content: space-between">
+            <div class="sign-up-frame">
+              <label>Password *</label>
+              <input
+                type="password"
+                name="memberPassword"
+                class="member-password"
+                placeholder="Password"
+                value=""
+              />
+              <div class="password-strength" aria-hidden="true">
+                <span></span>
+              </div>
+            </div>
+            <div class="sign-up-frame">
+              <label>Repeat password *</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                class="confirm-password"
+                placeholder="Repeat password"
+                value=""
+              />
+            </div>
+          </div>
+
+          <div class="signup-input-frame">
+            <div class="media-frame auth-media-frame">
+              <img class="upload-img-frame" src="/img/gymdesign_render_Two_collumn_grid_cb1b5850-fa8e-4a7b-a2b3-190c2e45facd.webp" />
+              <div class="upload-container">
+                <span class="media-text">Gym image</span>
+                <div
+                  class="file-box bs3-primary preview-image"
+                  style="margin-top: 25px; display: flex"
+                >
+                  <input
+                    class="upload-name"
+                    value="Choose image"
+                    disabled="disabled"
+                  />
+                  <label for="input-file" class="file-input-label"
+                    >Upload Image</label
+                  >
+                  <input
+                    type="file"
+                    id="input-file"
+                    class="upload-hidden form-control-file member-image"
+                    name="memberImage"
+                  />
+                </div>
+                <p class="thumbnail-desc">
+                  Please upload gym image.<br />
+                  Attention only:.jpg, .jpeg, or .png. <br />
+                  formats allowed!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <input name="memberType" value="RESTAURANT" hidden />
+
+          <button class="signup-btn btn" name="signup" type="submit">
+            Signup
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/signup.js"></script>
+</body>
+
+<%- include('includes/footer') %>

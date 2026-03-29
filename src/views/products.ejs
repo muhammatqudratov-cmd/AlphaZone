@@ -1,0 +1,295 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/products.css" />
+<link rel="stylesheet" type="text/css" href="/css/theme.css" />
+
+<body class="page-products">
+  <div class="products-container admin-shell">
+    <div class="navigation-menu admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-kicker">Iron Forge</span>
+        <strong>Alpha Zone</strong>
+      </div>
+      <ul class="nav justify-content-center">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link active" href="/admin/">Home</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/product/all">Products</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all">Users</a>
+        </li>
+        <li
+          class="nav-item"
+          style="cursor: pointer"
+          onclick="return confirm('Do you want to logout?')"
+        >
+          <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="admin-content">
+      <div class="gym-menu-frame">
+        <div class="board panel-card">
+          <div class="dishes-table">
+            <div class="section-heading-row">
+              <span class="new-dish-txt" style="margin-bottom: 30px">
+                SUPPLEMENTS
+              </span>
+            </div>
+            <table class="table table-bordered table-hover">
+              <thead class="thead-light">
+                <tr class="thead-light">
+                  <th scope="col">T/r</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Product Type</th>
+                  <th scope="col">Product Volume</th>
+                  <th scope="col">Product Price</th>
+                  <th scope="col">Product Left Count</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <% products.map(function(value, key) { %>
+                <tbody>
+                  <td><%= key + 1 %></td>
+                  <td><%= value.productName %></td>
+                  <td><%= value.productCollection %></td>
+                  <td>
+<%
+  const weightLabels = {
+    "250":  "250 g",
+    "500":  "500 g",
+    "1000": "1 kg",
+    "2000": "2 kg",
+    "5000": "5 kg"
+  };
+
+  const volumeLabels = {
+    "250":  "250 ml",
+    "330":  "330 ml",
+    "500":  "500 ml",
+    "750":  "750 ml",
+    "1000": "1 liter"
+  };
+
+  const isDrink = value.productType === 'DRINK';
+
+  const rawVal = isDrink
+    ? String(value.productVolume)
+    : String(value.productWeight);
+
+  const displayVal = isDrink
+    ? (volumeLabels[rawVal] || rawVal + ' ml')
+    : (weightLabels[rawVal] || rawVal + ' g');
+%>
+<%= displayVal %>
+</td>
+                  <td><%= value.productPrice %></td>
+                  <td><%= value.productLeftCount %></td>
+                  <td>
+                    <select
+                      class="spec-select new-product-status"
+                      id="<%= value._id %>"
+                    >
+                      <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                      <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                      <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                    </select>
+                  </td>
+                </tbody>
+              <% }) %>
+            </table>
+
+            <div class="long-input" style="align-items: flex-end; margin-bottom: 25px">
+              <button class="btn btn-primary" id="process-btn">New Product</button>
+            </div>
+          </div>
+
+          <form
+            onsubmit="return validateForm()"
+            action="/admin/product/create"
+            method="POST"
+            class="dish-container panel-card"
+            enctype="multipart/form-data"
+          >
+            <div class="long-input" style="display: flex; align-items: center">
+              <span class="new-dish-txt">NEW PRODUCT DETAIL</span>
+            </div>
+
+            <div class="login-input-frame">
+              <div class="long-input">
+                <label>Product Name</label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="productName"
+                  class="product-name"
+                />
+              </div>
+              <input name="productStatus" value="PAUSE" class="product-status" hidden />
+            </div>
+
+            <div class="half-input-frame">
+              <div class="half-input">
+                <label>Product Price</label>
+                <input type="number" placeholder="Price" name="productPrice" class="product-price" />
+              </div>
+              <div class="half-input">
+                <label>Product Left Counts</label>
+                <input type="number" placeholder="Counts" name="productLeftCount" class="product-left-count" />
+              </div>
+            </div>
+
+            <div class="half-input-frame">
+              <div class="half-input">
+                <label>Product Type</label>
+                <select class="product-collection" name="productCollection">
+                  <option value="POWDER" selected>Powder</option>
+                  <option value="CAPSULE">Capsule</option>
+                  <option value="DRINK">Drink</option>
+                  <option value="SNACK">Snack</option>
+                  <option value="VITAMIN">Vitamin</option>
+                  <option value="CLOTH">Cloth</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="product-weight">
+                <label>Product Weight</label>
+                <select name="productWeight" class="product-weight">
+                  <option value="250">250 g</option>
+                  <option value="500">500 g</option>
+                  <option value="1000" selected>1 kg</option>
+                  <option value="2000">2 kg</option>
+                  <option value="5000">5 kg</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="product-volume" style="display: none">
+                <label>Drink Volume</label>
+                <select name="productVolume" class="product-volume">
+                  <option value="250">250 ml</option>
+                  <option value="330">330 ml</option>
+                  <option value="500">500 ml</option>
+                  <option value="750">750 ml</option>
+                  <option value="1000">1 liter</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="product-size" style="display: none">
+                <label>Cloth Size</label>
+                <select name="productSize" class="product-cloth-size">
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M" selected>M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="product-count" style="display: none">
+                <label>Count</label>
+                <select name="productCount" class="product-count">
+                  <option value="30" selected>30 count</option>
+                  <option value="60">60 count</option>
+                  <option value="90">90 count</option>
+                  <option value="120">120 count</option>
+                  <option value="180">180 count</option>
+                  <option value="240">240 count</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="long-input">
+              <label>Product Description</label>
+              <textarea name="productDesc" class="product-desc"></textarea>
+            </div>
+
+            <div class="img-frame">
+
+<label>Product Images</label>
+<div class="media-frame">
+  <div class="upload-img-box">
+    <span class="upload-placeholder" aria-hidden="true">
+    </span>
+    <img src="/img/upload.svg" class="1" id="image-section-1" />
+    <input
+      type="file"
+      id="file"
+      name="productImages"
+      class="image-one"
+      required
+      onchange="previewFileHandler(this, 1)"
+    />
+  </div>
+  <div class="upload-img-box">
+    <span class="upload-placeholder" aria-hidden="true">
+    </span>
+    <img src="/img/upload.svg" class="2" id="image-section-2" />
+    <input
+      type="file"
+      id="file"
+      name="productImages"
+      class="image-two"
+      onchange="previewFileHandler(this, 2)"
+    />
+  </div>
+  <div class="upload-img-box">
+    <span class="upload-placeholder" aria-hidden="true">
+    </span>
+    <img src="/img/upload.svg" class="3" id="image-section-3" />
+    <input
+      type="file"
+      id="file"
+      name="productImages"
+      class="image-three"
+      onchange="previewFileHandler(this, 3)"
+    />
+  </div>
+  <div class="upload-img-box">
+    <span class="upload-placeholder" aria-hidden="true">
+    </span>
+    <img src="/img/upload.svg" class="4" id="image-section-4" />
+    <input
+      type="file"
+      id="file"
+      name="productImages"
+      class="image-four"
+      onchange="previewFileHandler(this, 4)"
+    />
+  </div>
+  <div class="upload-img-box">
+    <span class="upload-placeholder" aria-hidden="true">
+    </span>
+    <img src="/img/upload.svg" class="5" id="image-section-5" />
+    <input
+      type="file"
+      id="file"
+      name="productImages"
+      class="image-five"
+      onchange="previewFileHandler(this, 5)"
+    />
+  </div>
+  <input name="restaurantIid" class="restaurant-id" hidden />
+</div>
+              </div>
+            </div>
+
+            <div class="operation-buttons">
+              <button class="btn btn-danger" id="cancel-btn">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="create-btn">
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/products.js"></script>
+</body>
+
+<%- include('includes/footer') %>
