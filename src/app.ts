@@ -24,7 +24,7 @@ app.use(cors({                    // ← QO'SH
 }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({extended:true}));
-app.use("/uploads", express.static("/uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));

@@ -55,84 +55,84 @@ function syncUploadPreviewState() {
     });
 }
 
-    function toggleProductFields() {
-        const selectedValue = $(".product-collection").val();
+function toggleProductFields() {
+    const selectedValue = $(".product-collection").val();
 
-        if (selectedValue === "CLOTH") {
-            $("#product-size").show();
-            $("#product-weight").hide();
-            $("#product-volume").hide();
-            $("#product-count").hide();
+    // Avval hammasini yashir va disable qil
+    $("#product-weight").hide();
+    $("#product-volume").hide();
+    $("#product-size").hide();
+    $("#product-count").hide();
 
-            $('[name="productSize"]').prop("disabled", false);
-            $('[name="productWeight"]').prop("disabled", true);
-            $('[name="productVolume"]').prop("disabled", true);
-            $('[name="productCount"]').prop("disabled", true);
-        } else if (selectedValue === "DRINK") {
-            $("#product-volume").show();
-            $("#product-weight").hide();
-            $("#product-size").hide();
-            $("#product-count").hide();
+    $('[name="productWeight"]').prop("disabled", true);
+    $('[name="productVolume"]').prop("disabled", true);
+    $('[name="productSize"]').prop("disabled", true);
+    $('[name="productCount"]').prop("disabled", true);
 
-            $('[name="productVolume"]').prop("disabled", false);
-            $('[name="productWeight"]').prop("disabled", true);
-            $('[name="productSize"]').prop("disabled", true);
-            $('[name="productCount"]').prop("disabled", true);
-        } else if (selectedValue === "VITAMIN") {
-            $("#product-count").show();
-            $("#product-weight").hide();
-            $("#product-volume").hide();
-            $("#product-size").hide();
+    if (selectedValue === "CLOTH") {
+        $("#product-size").show();
+        $('[name="productSize"]').prop("disabled", false);
+        $('[name="productSize"]').html(`
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M" selected>M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        `);
 
-            $('[name="productCount"]').prop("disabled", false);
-            $('[name="productWeight"]').prop("disabled", true);
-            $('[name="productVolume"]').prop("disabled", true);
-            $('[name="productSize"]').prop("disabled", true);
+    } else if (selectedValue === "DRINK") {
+        $("#product-volume").show();
+        $('[name="productVolume"]').prop("disabled", false);
+        $('[name="productVolume"]').html(`
+            <option value="250">250 ml</option>
+            <option value="330">330 ml</option>
+            <option value="500" selected>500 ml</option>
+            <option value="750">750 ml</option>
+            <option value="1000">1 liter</option>
+        `);
 
-            $('[name="productCount"]').html(`
-                <option value="30" selected>30 count</option>
-                <option value="60">60 count</option>
-                <option value="90">90 count</option>
-                <option value="120">120 count</option>
-                <option value="180">180 count</option>
-                <option value="240">240 count</option>
-            `);
-        } else if (selectedValue === "CAPSULE") {
-            $("#product-count").show();
-            $("#product-weight").hide();
-            $("#product-volume").hide();
-            $("#product-size").hide();
+    } else if (selectedValue === "VITAMIN") {
+        $("#product-count").show();
+        $('[name="productCount"]').prop("disabled", false);
+        $('[name="productCount"]').html(`
+            <option value="30" selected>30 count</option>
+            <option value="60">60 count</option>
+            <option value="90">90 count</option>
+            <option value="120">120 count</option>
+            <option value="180">180 count</option>
+            <option value="240">240 count</option>
+        `);
 
-            $('[name="productCount"]').prop("disabled", false);
-            $('[name="productWeight"]').prop("disabled", true);
-            $('[name="productVolume"]').prop("disabled", true);
-            $('[name="productSize"]').prop("disabled", true);
+    } else if (selectedValue === "CAPSULE") {
+        $("#product-count").show();
+        $('[name="productCount"]').prop("disabled", false);
+        $('[name="productCount"]').html(`
+            <option value="1 count">1 count</option>
+            <option value="2 count">2 count</option>
+            <option value="3 count">3 count</option>
+            <option value="4 count">4 count</option>
+            <option value="5 count" selected>5 count</option>
+            <option value="6 count">6 count</option>
+            <option value="7 count">7 count</option>
+            <option value="8 count">8 count</option>
+            <option value="9 count">9 count</option>
+            <option value="10 count">10 count</option>
+        `);
 
-            $('[name="productCount"]').html(`
-                <option value="1">1 count</option>
-                <option value="2">2 count</option>
-                <option value="3">3 count</option>
-                <option value="4">4 count</option>
-                <option value="5" selected>5 count</option>
-                <option value="6">6 count</option>
-                <option value="7">7 count</option>
-                <option value="8">8 count</option>
-                <option value="9">9 count</option>
-                <option value="10">10 count</option>
-            `);
-        } else {
-            $("#product-weight").show();
-            $("#product-volume").hide();
-            $("#product-size").hide();
-            $("#product-count").hide();
-
-            $('[name="productWeight"]').prop("disabled", false);
-            $('[name="productVolume"]').prop("disabled", true);
-            $('[name="productSize"]').prop("disabled", true);
-            $('[name="productCount"]').prop("disabled", true);
-        }
+    } else {
+        // POWDER, SNACK
+        $("#product-weight").show();
+        $('[name="productWeight"]').prop("disabled", false);
+        $('[name="productWeight"]').html(`
+            <option value="250">250 g</option>
+            <option value="500">500 g</option>
+            <option value="1000" selected>1 kg</option>
+            <option value="2000">2 kg</option>
+            <option value="5000">5 kg</option>
+        `);
     }
-
+}
     $(".product-collection").on("change", toggleProductFields);
     toggleProductFields();
     syncInitialStatuses();
